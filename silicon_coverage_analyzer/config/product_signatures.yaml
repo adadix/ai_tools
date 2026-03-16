@@ -1,0 +1,50 @@
+# Product Signature Validation Configuration
+# 
+# This file defines domain signatures for each product to detect data contamination.
+# When datasets are loaded, they are validated against these signatures to ensure
+# they contain the correct architecture-specific domains.
+#
+# Format:
+#   product_id:
+#     required: [list of domains that MUST be present]
+#     forbidden: [list of domains that MUST NOT be present]
+#
+# If a product is not listed here, validation is skipped (permissive mode).
+
+product_signatures:
+  # Intel Arrow Lake-S (Client, 2024)
+  # Hybrid architecture with P-cores and E-cores
+  arrowlake_s:
+    required:
+      - e-core  # E-core (efficiency cores) - signature domain
+    forbidden:
+      - hbo     # HBO unit (server-specific)
+      - lpe-core  # LPE-core (Wildcatlake-specific)
+  
+  # Intel Wildcat Lake (Server)
+  # Server architecture with HBO unit
+  wildcatlake:
+    required:
+      - hbo  # HBO (Home agent/memory controller) - signature domain
+    forbidden:
+      - e-core    # E-core (client-specific)
+      - hac_cbo   # HAC CBO (ArrowLake-specific)
+      - hac_ncu   # HAC NCU (ArrowLake-specific)
+
+# Add new products here as they are discovered
+# Example:
+#
+# lunarlake:
+#   required:
+#     - some_unique_domain
+#   forbidden:
+#     - incompatible_domain
+#
+# meteorlake:
+#   required:
+#     - meteor_signature_domain
+#   forbidden:
+#     - conflicting_domain
+
+# Note: Products not listed here will have validation skipped.
+# The system will still work correctly, just without contamination detection.

@@ -1,0 +1,459 @@
+domain_colors:
+  core: '#0071C5'
+  p-core: '#0071C5'
+  e-core: '#f39c12'
+  atom: '#ff9800'
+  lpe-core: '#ffc107'
+  uncore: '#388e3c'
+  offcore: '#f57c00'
+  memory: '#7b1fa2'
+  imc: '#27ae60'
+  hbm: '#1abc9c'
+  m2m: '#16a085'
+  cbo: '#8e44ad'
+  cha: '#e91e63'
+  hac_cbo: '#c0392b'
+  llc: '#9b59b6'
+  ncu: '#16a085'
+  hac_ncu: '#d35400'
+  upi: '#34495e'
+  qpi: '#2c3e50'
+  mesh: '#7f8c8d'
+  m3upi: '#5d4037'
+  ufibridge: '#2c3e50'
+  iio: '#3f51b5'
+  pcie: '#607d8b'
+  power: '#e74c3c'
+  system: '#95a5a6'
+  custom_cache: '#00bcd4'
+  ddr5-mc: '#27ae60'
+  new_fabric: '#9c27b0'
+  pcie_gen5: '#ff5722'
+  xyz-core: '#4caf50'
+domain_priority:
+  p-core: 3
+  core: 3
+  imc: 3
+  uncore: 3
+  cha: 3
+  memory: 3
+  hbm: 3
+  e-core: 2
+  atom: 2
+  cbo: 2
+  ncu: 2
+  hac_cbo: 2
+  hac_ncu: 2
+  m2m: 2
+  upi: 2
+  qpi: 2
+  mesh: 2
+  m3upi: 2
+  lpe-core: 2
+  llc: 2
+  system: 1
+  power: 1
+  ufibridge: 1
+  iio: 1
+  pcie: 1
+  offcore: 1
+  custom_cache: 2
+  ddr5-mc: 3
+  new_fabric: 2
+  pcie_gen5: 1
+  xyz-core: 3
+domain_categories:
+  cpu_cores:
+    description: Processor execution cores
+    domains:
+    - p-core
+    - e-core
+    - core
+    - atom
+    - lpe-core
+    - xyz-core
+    patterns:
+    - core
+    - atom
+    stress_recommended:
+    - prime95
+    - linpack
+    - y-cruncher
+    - cpuburn
+    - stress-ng
+  memory_subsystem:
+    description: Memory controllers and DRAM interface
+    domains:
+    - imc
+    - hbm
+    - m2m
+    - memory
+    - ddr5-mc
+    patterns:
+    - imc
+    - mc
+    - memory
+    - m2m
+    - hbm
+    - ddr
+    stress_recommended:
+    - memtester
+    - stream
+    - mlc
+    - memicals
+    - membw
+  cache_coherency:
+    description: Cache and coherency management units
+    domains:
+    - cbo
+    - cha
+    - hac_cbo
+    - llc
+    - custom_cache
+    patterns:
+    - cbo
+    - cha
+    - llc
+    - cache
+    stress_recommended:
+    - stream
+    - memtester
+    - mlc
+  interconnect:
+    description: Inter-core and inter-die communication
+    domains:
+    - ncu
+    - hac_ncu
+    - upi
+    - qpi
+    - mesh
+    - m3upi
+    - new_fabric
+    patterns:
+    - ncu
+    - upi
+    - m3upi
+    - mesh
+    - qpi
+    stress_recommended:
+    - stress-ng
+    - stream
+  io_subsystem:
+    description: I/O and peripheral interfaces
+    domains:
+    - ufibridge
+    - iio
+    - pcie
+    - pcie_gen5
+    patterns:
+    - iio
+    - pcie
+    - ufi
+    - bridge
+    stress_recommended:
+    - fio
+    - iozone
+  power_management:
+    description: Power and frequency management
+    domains:
+    - power
+    patterns:
+    - power
+    - energy
+    - freq
+    stress_recommended:
+    - idle
+    - powertop
+  uncore_general:
+    description: General uncore resources
+    domains:
+    - uncore
+    - offcore
+    patterns:
+    - uncore
+    - offcore
+    stress_recommended:
+    - stress-ng
+    - sysbench
+critical_domains:
+- p-core
+- e-core
+- imc
+- memory
+- cbo
+- cha
+- ddr5-mc
+- xyz-core
+ml_domain_lists:
+  workload_detector:
+  - p-core
+  - e-core
+  - uncore
+  - imc
+  - cbo
+  - custom_cache
+  - ddr5-mc
+  - xyz-core
+  workload_clusterer:
+  - p-core
+  - e-core
+  - uncore
+  - core
+  - atom
+  - xyz-core
+  anomaly_detector:
+  - p-core
+  - e-core
+  - imc
+  - cbo
+  - hac_cbo
+  - ncu
+  - hac_ncu
+  - ufibridge
+  - power
+  - custom_cache
+  - ddr5-mc
+  - new_fabric
+  - xyz-core
+  action_prioritizer:
+  - p-core
+  - e-core
+  - imc
+  - memory
+  - ddr5-mc
+  - xyz-core
+uncore_domains:
+- cbo
+- ncu
+- hac_cbo
+- hac_ncu
+- cha
+- imc
+- upi
+- qpi
+- m2m
+- m3upi
+- custom_cache
+- ddr5-mc
+- new_fabric
+stress_tool_domains:
+  prime95:
+    domains:
+    - p-core
+    - e-core
+    categories:
+    - cpu_cores
+    type: compute
+    intensity: high
+  stress-ng:
+    domains:
+    - p-core
+    - e-core
+    - uncore
+    categories:
+    - cpu_cores
+    - uncore_general
+    type: mixed
+    intensity: high
+  memtester:
+    domains:
+    - uncore
+    - memory
+    - imc
+    categories:
+    - memory_subsystem
+    type: memory
+    intensity: high
+  linpack:
+    domains:
+    - p-core
+    categories:
+    - cpu_cores
+    type: compute
+    intensity: extreme
+  y-cruncher:
+    domains:
+    - p-core
+    - e-core
+    categories:
+    - cpu_cores
+    type: compute
+    intensity: extreme
+  cpuburn:
+    domains:
+    - p-core
+    - e-core
+    categories:
+    - cpu_cores
+    type: compute
+    intensity: extreme
+  stream:
+    domains:
+    - uncore
+    - memory
+    - imc
+    categories:
+    - memory_subsystem
+    - cache_coherency
+    type: memory
+    intensity: medium
+  sysbench:
+    domains:
+    - p-core
+    - e-core
+    - uncore
+    categories:
+    - cpu_cores
+    - uncore_general
+    type: mixed
+    intensity: medium
+  geekbench:
+    domains:
+    - p-core
+    - e-core
+    categories:
+    - cpu_cores
+    type: mixed
+    intensity: medium
+  cinebench:
+    domains:
+    - p-core
+    - e-core
+    categories:
+    - cpu_cores
+    type: compute
+    intensity: high
+  mlc:
+    domains:
+    - imc
+    - cbo
+    - cha
+    categories:
+    - memory_subsystem
+    - cache_coherency
+    type: memory
+    intensity: high
+  memicals:
+    domains:
+    - imc
+    - memory
+    categories:
+    - memory_subsystem
+    type: memory
+    intensity: high
+  sandstone:
+    domains:
+    - p-core
+    - e-core
+    - imc
+    categories:
+    - cpu_cores
+    - memory_subsystem
+    type: mixed
+    intensity: high
+  idle:
+    domains:
+    - system
+    categories:
+    - power_management
+    type: baseline
+    intensity: low
+  unknown:
+    domains:
+    - p-core
+    categories:
+    - cpu_cores
+    type: mixed
+    intensity: medium
+recommendations:
+  cpu_cores_idle:
+    condition: p-core or e-core domains show low stress
+    message: Consider CPU-intensive workload (prime95, linpack, stress-ng) to stress
+      core domains
+  memory_idle:
+    condition: imc, cbo, or uncore domains show low stress
+    message: Consider memory-intensive workload (memtester, stream, mlc) to stress
+      uncore/cache/memory domains
+  memory_anomaly:
+    condition: imc or cbo domains show high stress but low activity
+    message: Memory stress test not showing expected IMC/cache activity - check workload
+      configuration
+  uncore_coverage:
+    condition: Memory workload detected
+    message: Good memory-intensive workload detected. Uncore domain events should
+      be well-covered.
+  cache_egress:
+    condition: CHA/CBO egress events not toggling
+    message: Consider adding memory stress to activate CHA/IMC egress events
+architectures:
+  client_hybrid:
+    name: Client Hybrid Architecture (12th-15th Gen)
+    products:
+    - AlderLake
+    - RaptorLake
+    - MeteorLake
+    - ArrowLake
+    - LunarLake
+    domains:
+    - p-core
+    - e-core
+    - imc
+    - cbo
+    - hac_cbo
+    - ncu
+    - hac_ncu
+    - ufibridge
+    - power
+  client_monolithic:
+    name: Client Monolithic (Pre-12th Gen)
+    products:
+    - TigerLake
+    - IceLake
+    - CometLake
+    - CoffeeLake
+    domains:
+    - core
+    - uncore
+    - imc
+    - cbo
+    - power
+  server_sapphire:
+    name: Server - Sapphire Rapids
+    products:
+    - SapphireRapids
+    domains:
+    - core
+    - uncore
+    - cha
+    - imc
+    - m2m
+    - upi
+    - m3upi
+    - power
+  server_emerald:
+    name: Server - Emerald Rapids
+    products:
+    - EmeraldRapids
+    domains:
+    - core
+    - uncore
+    - cha
+    - imc
+    - m2m
+    - upi
+    - m3upi
+    - power
+  server_granite:
+    name: Server - Granite Rapids
+    products:
+    - GraniteRapids
+    domains:
+    - p-core
+    - uncore
+    - cha
+    - imc
+    - m2m
+    - upi
+    - m3upi
+    - hbm
+    - power

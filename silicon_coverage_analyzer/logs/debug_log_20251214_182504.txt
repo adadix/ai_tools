@@ -1,0 +1,314 @@
+================================================================================
+Silicon Coverage Analyzer - Debug Log
+Started: 2025-12-14 18:25:04
+================================================================================
+
+[DEBUG] Logging enabled: logs\debug_log_20251214_182504.txt
+[DEBUG] All console output will be saved to: logs\debug_log_20251214_182504.txt
+
+[STARTING] Silicon Coverage Analysis...
+[CONFIG] Duration: 60s, Max events/domain: 10000
+================================================================================
+SILICON COVERAGE ANALYZER - Analysis Mode
+PMU Event Coverage Analysis (Stress-Framework Agnostic)
+================================================================================
+
+
+[STARTING] Silicon Coverage Analysis
+================================================================================
+[░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░]   0.0% | Initialization   
+
+[1/5] Connecting to SUT...
+[NETWORK] Found SUT IP from CommunicatorConfig: 10.138.140.217
+      [DEBUG] Windows detection failed
+      [DEBUG] Error: Warning: Permanently added '10.138.140.217' (ED25519) to the list of known hosts.
+bash: line 2: =: command not found
+bash: line 3: .Caption: command not found
+bash: line 3: Write-Output: command not f
+
+      [i]  WORKLOAD DETECTED: Memicals (Intel Memory Stress)
+      Active processes: 1
+      [INFO] Analyzing coverage under active workload
+
+
+      [OK] Connected: 10.138.140.217
+       OS: Debian GNU/Linux 12 (bookworm) 12
+
+[1.5/5] Checking EMON installation...
+   Testing connection to 10.138.140.217...
+   [OK] SSH connection working
+   [DEBUG] Command success: True
+   [DEBUG] Stdout length: 826
+   [DEBUG] Stderr: Warning: Permanently added '10.138.140.217' (ED25519) to the list of known hosts.
+
+   [DEBUG] First 200 chars: PATH=/opt/intel/sep_private_5.56_linux_10010753b11497234/bin64:/opt/intel/sep_private_5.56_linux_10010753b11497234/android_target:/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin
+C_INCLUDE
+   [OK] EMON is installed and working
+[1.6/5] Validating EMON installation...
+      EMON Version: 56
+      Product: Arrowlake-S
+      Cores: 20 (8P + 12E)
+      PMU Units: imc(2), cbo(12), hac_cbo(2), ncu(2), hac_ncu(2), ufibridge(12)
+
+[2/5] Discovering PMU domains and events...
+   [DEBUG] DomainAnalyzer os_type: linux
+   [DEBUG] Command: sep_vars=$(find /opt/intel -name "sep_vars.sh" -type f 2>/dev/null | head -1); if [ -n "$sep_vars" ]; then source "$sep_vars"; fi; emon -pmu-types
+   [DEBUG] Success: True, Stdout len: 709, Stderr: Warning: Permanently added '10.138.140.217' (ED25519) to the list of known hosts.
+
+      [DEBUG] LD_LIBRARY_PATH=: Count=0, Output: PATH=/opt/intel/sep_private_5.56_linux_10010753b11497234/bin64:/opt/intel/sep_private_5.56_linux_10010753b11497234/android_target:/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin | C_INCLUDE_PATH=/opt/intel/sep_private_5.56_linux_10010753b11497234/config/emon_api: | CPLUS_INCLUDE_PATH=/opt/intel/sep_private_5.56_linux_10010753b11497234/config/emon_api:
+      [DEBUG] p-core: Count=0, Output: PATH=/opt/intel/sep_private_5.56_linux_10010753b11497234/bin64:/opt/intel/sep_private_5.56_linux_10010753b11497234/android_target:/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin | C_INCLUDE_PATH=/opt/intel/sep_private_5.56_linux_10010753b11497234/config/emon_api: | CPLUS_INCLUDE_PATH=/opt/intel/sep_private_5.56_linux_10010753b11497234/config/emon_api:
+      [DEBUG] e-core: Count=0, Output: PATH=/opt/intel/sep_private_5.56_linux_10010753b11497234/bin64:/opt/intel/sep_private_5.56_linux_10010753b11497234/android_target:/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin | C_INCLUDE_PATH=/opt/intel/sep_private_5.56_linux_10010753b11497234/config/emon_api: | CPLUS_INCLUDE_PATH=/opt/intel/sep_private_5.56_linux_10010753b11497234/config/emon_api:
+      [DEBUG] imc: Count=0, Output: PATH=/opt/intel/sep_private_5.56_linux_10010753b11497234/bin64:/opt/intel/sep_private_5.56_linux_10010753b11497234/android_target:/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin | C_INCLUDE_PATH=/opt/intel/sep_private_5.56_linux_10010753b11497234/config/emon_api: | CPLUS_INCLUDE_PATH=/opt/intel/sep_private_5.56_linux_10010753b11497234/config/emon_api:
+      [DEBUG] cbo: Count=0, Output: PATH=/opt/intel/sep_private_5.56_linux_10010753b11497234/bin64:/opt/intel/sep_private_5.56_linux_10010753b11497234/android_target:/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin | C_INCLUDE_PATH=/opt/intel/sep_private_5.56_linux_10010753b11497234/config/emon_api: | CPLUS_INCLUDE_PATH=/opt/intel/sep_private_5.56_linux_10010753b11497234/config/emon_api:
+      [DEBUG] hac_cbo: Count=0, Output: PATH=/opt/intel/sep_private_5.56_linux_10010753b11497234/bin64:/opt/intel/sep_private_5.56_linux_10010753b11497234/android_target:/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin | C_INCLUDE_PATH=/opt/intel/sep_private_5.56_linux_10010753b11497234/config/emon_api: | CPLUS_INCLUDE_PATH=/opt/intel/sep_private_5.56_linux_10010753b11497234/config/emon_api:
+      [DEBUG] ncu: Count=0, Output: PATH=/opt/intel/sep_private_5.56_linux_10010753b11497234/bin64:/opt/intel/sep_private_5.56_linux_10010753b11497234/android_target:/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin | C_INCLUDE_PATH=/opt/intel/sep_private_5.56_linux_10010753b11497234/config/emon_api: | CPLUS_INCLUDE_PATH=/opt/intel/sep_private_5.56_linux_10010753b11497234/config/emon_api:
+      [DEBUG] hac_ncu: Count=0, Output: PATH=/opt/intel/sep_private_5.56_linux_10010753b11497234/bin64:/opt/intel/sep_private_5.56_linux_10010753b11497234/android_target:/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin | C_INCLUDE_PATH=/opt/intel/sep_private_5.56_linux_10010753b11497234/config/emon_api: | CPLUS_INCLUDE_PATH=/opt/intel/sep_private_5.56_linux_10010753b11497234/config/emon_api:
+      [DEBUG] ufibridge: Count=0, Output: PATH=/opt/intel/sep_private_5.56_linux_10010753b11497234/bin64:/opt/intel/sep_private_5.56_linux_10010753b11497234/android_target:/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin | C_INCLUDE_PATH=/opt/intel/sep_private_5.56_linux_10010753b11497234/config/emon_api: | CPLUS_INCLUDE_PATH=/opt/intel/sep_private_5.56_linux_10010753b11497234/config/emon_api:
+      [DEBUG] power: Count=0, Output: PATH=/opt/intel/sep_private_5.56_linux_10010753b11497234/bin64:/opt/intel/sep_private_5.56_linux_10010753b11497234/android_target:/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin | C_INCLUDE_PATH=/opt/intel/sep_private_5.56_linux_10010753b11497234/config/emon_api: | CPLUS_INCLUDE_PATH=/opt/intel/sep_private_5.56_linux_10010753b11497234/config/emon_api:
+   [1/10] Analyzing LD_LIBRARY_PATH=...
+      [OK] 0 events found
+   [2/10] Analyzing p-core...
+      [OK] 675 events found
+   [3/10] Analyzing e-core...
+      [OK] 453 events found
+   [4/10] Analyzing imc...
+      [OK] 66 events found
+   [5/10] Analyzing cbo...
+      [OK] 203 events found
+   [6/10] Analyzing hac_cbo...
+      [OK] 193 events found
+   [7/10] Analyzing ncu...
+      [OK] 72 events found
+   [8/10] Analyzing hac_ncu...
+      [OK] 104 events found
+   [9/10] Analyzing ufibridge...
+      [OK] 54 events found
+   [10/10] Analyzing power...
+      [OK] 23 events found
+      Domains: 10 available
+      Events: 1843 total discovered
+        - LD_LIBRARY_PATH=: 0 events
+        - p-core: 675 events
+        - e-core: 453 events
+        - imc: 66 events
+        - cbo: 203 events
+        ... and 5 more
+
+
+[3/5] Collecting coverage data...
+
+      [ESTIMATE] Standard optimized collection:
+          Total events: 1843
+          Domains: 10
+          Sample duration: 60 seconds
+          Batch size: 1-1 events/batch (auto-tuned at runtime)
+
+          BEST CASE (1 events/batch):
+            Batches: ~1840
+            Time: ~1909 minutes (31.8 hours)
+
+          TYPICAL CASE (1 events/batch):
+            Batches: ~1840
+            Time: ~1909 minutes (31.8 hours)
+
+          WORST CASE (1 event/batch):
+            Batches: ~1840
+            Time: ~1909 minutes (31.8 hours)
+
+          Estimated completion: 2025-12-16 02:13:56 (typical)
+                         Range: 02:13 - 02:13
+
+
+[DEBUG] Creating health monitor...
+
+[HEALTH] Monitoring system health: 
+[DEBUG] Health command output (402 chars):
+===DISK_SPACE===
+16115284 10740968 4550108 71%
+===EMON_PROCESS===
+489 /usr/bin/dbus-daemon --system --address=systemd: --nofork --nopidfile --systemd-activation --syslog-only
+===CPU_USAGE===
+100.0===MEMORY===
+3936 513 2470
+===LOAD_AVG===
+ 1.02, 1.03, 1.00
+===NETWORK===
+1420304246 3134372271
+===TEMP===
+93
+===DISK_IO===
+0.00 0.00
+===CONTEXT_SWITCHES===
+202804973
+===PROCESSES===
+240
+===INTERRUPTS===
+0
+
+
+[DEBUG] Found 23 sections in output
+[DEBUG] DISK_SPACE: '16115284 10740968 4550108 71%'
+[DEBUG] EMON_PROCESS: '489 /usr/bin/dbus-daemon --system --address=systemd: --nofork --nopidfile --syst'
+[DEBUG] CPU_USAGE: '100.0'
+[DEBUG] MEMORY: '3936 513 2470'
+[DEBUG] LOAD_AVG: '1.02, 1.03, 1.00'
+[DEBUG] NETWORK: '1420304246 3134372271'
+[DEBUG] TEMP: '93'
+[DEBUG] DISK_IO: '0.00 0.00'
+[DEBUG] CONTEXT_SWITCHES: '202804973'
+[DEBUG] PROCESSES: '240'
+[DEBUG] INTERRUPTS: '0'
+[OK]
+================================================================================
+[HEALTH] Snapshot captured - CPU: 100.0%, Memory: 13.03%, Disk Free: 4.34 GB
+[HEALTH] EMON Running: False, PID: N/A
+[HEALTH] 
+[HEALTH] NOTE: CPU utilization measures OS workload, NOT EMON PMU coverage
+[HEALTH]       * EMON coverage = % of hardware events monitored
+[HEALTH]       * CPU utilization = % of CPU time executing vs idle
+[HEALTH]       Both can be valid: idle CPU (0%) + high EMON coverage (80-90%)
+================================================================================
+
+
+      [DEBUG] skip_emon_init = True
+      [INIT] Skipping EMON initialization (already done)
+      [INIT] [OK] Using existing EMON driver
+[CHECKPOINT] Initialized: C:\silicon_coverage_analyzer_data\checkpoints\checkpoint_20251214_182520.json
+      [CHECKPOINT] Saved: checkpoint_20251214_182520.json
+
+      [CHECKPOINT] Session started: 20251214_182520
+      [CHECKPOINT] 10 domains to collect
+      [CHECKPOINT] Checkpoint file: C:\silicon_coverage_analyzer_data\checkpoints\checkpoint_20251214_182520.json
+      [MODE] Deferred transfer - collect all files first, transfer at end
+              This prevents connection timeouts during long collections
+
+      [PROGRESS] Starting collection: 10 domains
+      
+
+      [DOMAIN 2/10] P-CORE
+      [STRESS TRACKING] Monitoring workload changes...
+[STRESS TRACKER] Starting detection on 10.138.140.217...
+[STRESS TRACKER] Detection result: detected=True, processes=1
+[STRESS TRACKER] Initial stress: Memicals (Intel Memory Stress)
+[STRESS TRACKER] Initial stress: Memicals (Intel Memory Stress)
+      [STRESS TRACKING] Initial: Memicals (Intel Memory Stress)
+      [SEQUENTIAL MODE] Collecting 1 event at a time
+      [COLLECT] 675 events in 675 batches (1 events/batch)
+      [PHASE 1/3] Collecting data on SUT...
+          [BATCH 1/675] Collecting 1 events (60s)...
+          [DEBUG] Using timeout: 180s (base=180, current=180)
+[DEBUG] No output from health command! Success=False
+[DEBUG] No output from health command! Success=False
+[STRESS TRACKER] Periodic check at t=61s...
+[STRESS TRACKER] Check result: detected=True, processes=1
+[STRESS TRACKER] Current stress: Memicals (Intel Memory Stress)
+[STRESS TRACKER] t=1.0min: Memicals (Intel Memory Stress)
+          [BATCH 1/675] [OK] Completed in 63.5s
+          [BATCH 2/675] Collecting 1 events (60s)...
+          [DEBUG] Using timeout: 180s (base=180, current=180)
+[DEBUG] No output from health command! Success=False
+
+[DEBUG] Health command output (458 chars):
+===FILE_SIZE===
+0
+===DISK_SPACE===
+16115284 10740980 4550096 71%
+===EMON_PROCESS===
+root     1840862  0.3  0.2 298856  8960 ?        Sl   12:56   0:00 emon -t 60 -C INST_RETIRED.PREC_DIST -f /tmp/emon_p-core_20251214_182520_b1.csv
+===CPU_USAGE===
+100.0===MEMORY===
+3936 503 2480
+===LOAD_AVG===
+ 1.05, 1.03, 1.00
+===NETWORK===
+1420452110 3134599677
+===TEMP===
+93
+===DISK_IO===
+0.00 0.00
+===CONTEXT_SWITCHES===
+202822068
+===PROCESSES===
+243
+===INTERRUPTS===
+0
+
+
+[DEBUG] Found 25 sections in output
+[DEBUG] FILE_SIZE: '0'
+[DEBUG] DISK_SPACE: '16115284 10740980 4550096 71%'
+[DEBUG] EMON_PROCESS: 'root     1840862  0.3  0.2 298856  8960 ?        Sl   12:56   0:00 emon -t 60 -C'
+[DEBUG] CPU_USAGE: '100.0'
+[DEBUG] MEMORY: '3936 503 2480'
+[DEBUG] LOAD_AVG: '1.05, 1.03, 1.00'
+[DEBUG] NETWORK: '1420452110 3134599677'
+[DEBUG] TEMP: '93'
+[DEBUG] DISK_IO: '0.00 0.00'
+[DEBUG] CONTEXT_SWITCHES: '202822068'
+[DEBUG] PROCESSES: '243'
+[DEBUG] INTERRUPTS: '0'
+[OK]
+================================================================================
+[HEALTH] Snapshot captured - CPU: 100.0%, Memory: 12.78%, Disk Free: 4.34 GB
+[HEALTH] EMON Running: True, PID: 1840862
+[HEALTH] 
+[HEALTH] NOTE: CPU utilization measures OS workload, NOT EMON PMU coverage
+[HEALTH]       * EMON coverage = % of hardware events monitored
+[HEALTH]       * CPU utilization = % of CPU time executing vs idle
+[HEALTH]       Both can be valid: idle CPU (0%) + high EMON coverage (80-90%)
+================================================================================
+
+
+
+[INTERRUPTED] Analysis cancelled by user
+      [CHECKPOINT] Saved: checkpoint_20251214_182520.json
+
+      [CHECKPOINT] Session failed: User interrupted (Ctrl+C)
+
+[DEBUG] Health command output (456 chars):
+===FILE_SIZE===
+0
+===DISK_SPACE===
+16115284 10740980 4550096 71%
+===EMON_PROCESS===
+root     1840862  0.2  0.2 298856  8960 ?        Sl   12:56   0:00 emon -t 60 -C INST_RETIRED.PREC_DIST -f /tmp/emon_p-core_20251214_182520_b1.csv
+===CPU_USAGE===
+100.0===MEMORY===
+3936 510 2473
+===LOAD_AVG===
+ 1.05, 1.03, 1.00
+===NETWORK===
+1420468216 3134619064
+===TEMP===
+93
+===DISK_IO===
+0.00 0.00
+===CONTEXT_SWITCHES===
+202823872
+===PROCESSES===
+243
+===INTERRUPTS===
+
+
+      [CHECKPOINT] Data saved - can resume with: --resume 20251214_182520[DEBUG] Found 25 sections in output
+
+[DEBUG] FILE_SIZE: '0'
+[DEBUG] DISK_SPACE: '16115284 10740980 4550096 71%'
+[DEBUG] EMON_PROCESS: 'root     1840862  0.2  0.2 298856  8960 ?        Sl   12:56   0:00 emon -t 60 -C'
+[DEBUG] CPU_USAGE: '100.0'
+[DEBUG] MEMORY: '3936 510 2473'
+[DEBUG] LOAD_AVG: '1.05, 1.03, 1.00'
+[DEBUG] NETWORK: '1420468216 3134619064'
+[DEBUG] TEMP: '93'
+[DEBUG] DISK_IO: '0.00 0.00'
+[DEBUG] CONTEXT_SWITCHES: '202823872'
+[DEBUG] PROCESSES: '243'
+[DEBUG] INTERRUPTS: ''
+[OK][CHECKPOINT] Data saved. Resume with: --resume 20251214_182520
+
+================================================================================
+[HEALTH] Snapshot captured - CPU: 100.0%, Memory: 12.96%, Disk Free: 4.34 GB
+
+================================================================================
+Ended: 2025-12-14 18:27:07
+================================================================================

@@ -1,0 +1,369 @@
+# EMON Domain-Based Coverage Configuration
+#
+# INTEL CONFIDENTIAL - INTERNAL USE ONLY
+#
+# This file defines the complete PMU domain hierarchy for Intel platforms,
+# mapping performance monitoring events to specific silicon functional units.
+
+# PMU Domain Hierarchy - Based on Intel Microarchitecture
+pmu_domains:
+  # ============================================================================
+  # CORE DOMAINS - Per-Core Performance Monitoring
+  # ============================================================================
+  
+  p-core:
+    name: "Performance Core (P-Core)"
+    description: "High-performance cores (Lion Cove / Redwood Cove)"
+    sub_domains:
+      frontend:
+        name: "Frontend Pipeline"
+        events:
+          - INST_RETIRED
+          - ICACHE
+          - ITLB_MISSES
+          - FRONTEND_RETIRED
+          - DECODE
+          - IDQ
+          - BACLEARS
+          
+      backend:
+        name: "Backend Execution"
+        events:
+          - UOPS_EXECUTED
+          - UOPS_RETIRED
+          - RESOURCE_STALLS
+          - RS_EVENTS
+          - ROB_MISC_EVENTS
+          - CYCLE_ACTIVITY
+          
+      memory:
+        name: "Memory Subsystem"
+        events:
+          - MEM_LOAD_RETIRED
+          - MEM_STORE_RETIRED
+          - MEM_INST_RETIRED
+          - MEM_LOAD_L3_HIT_RETIRED
+          - MEM_LOAD_L3_MISS_RETIRED
+          - OFFCORE_REQUESTS
+          - OFFCORE_RESPONSE
+          - SQ_MISC
+          - LD_BLOCKS
+          - DTLB_LOAD_MISSES
+          - DTLB_STORE_MISSES
+          
+      l1_cache:
+        name: "L1 Cache"
+        events:
+          - L1D_PEND_MISS
+          - L1D
+          - L1I
+          - ICACHE
+          - LONGEST_LAT_CACHE
+          
+      l2_cache:
+        name: "L2 Cache"  
+        events:
+          - L2_RQSTS
+          - L2_LINES_IN
+          - L2_LINES_OUT
+          - L2_TRANS
+          
+      branch:
+        name: "Branch Prediction"
+        events:
+          - BR_INST_RETIRED
+          - BR_MISP_RETIRED
+          - BACLEARS
+          
+      fpu:
+        name: "Floating Point Unit"
+        events:
+          - FP_ARITH_INST_RETIRED
+          - FP_COMP_OPS_EXE
+          - ARITH
+          
+      simd:
+        name: "SIMD / Vector Units"
+        events:
+          - FP_ARITH_INST_RETIRED.SCALAR
+          - FP_ARITH_INST_RETIRED.128B
+          - FP_ARITH_INST_RETIRED.256B
+          - FP_ARITH_INST_RETIRED.512B
+          
+      topdown:
+        name: "TopDown Analysis"
+        events:
+          - TOPDOWN
+          - PERF_METRICS
+          - TOPDOWN_RETIRING
+          - TOPDOWN_BAD_SPEC
+          - TOPDOWN_FE_BOUND
+          - TOPDOWN_BE_BOUND
+          
+  e-core:
+    name: "Efficiency Core (E-Core)"
+    description: "Power-efficient cores (Crestmont / Gracemont)"
+    sub_domains:
+      frontend:
+        name: "Frontend Pipeline"
+        events:
+          - INST_RETIRED
+          - ICACHE
+          - ITLB_MISSES
+          
+      backend:
+        name: "Backend Execution"
+        events:
+          - UOPS_RETIRED
+          - TOPDOWN_RETIRING
+          
+      memory:
+        name: "Memory Subsystem"
+        events:
+          - MEM_LOAD_RETIRED
+          - MEM_STORE_RETIRED
+          - OFFCORE_REQUESTS
+          - LD_BLOCKS
+          - DTLB_LOAD_MISSES
+          
+      branch:
+        name: "Branch Prediction"
+        events:
+          - BR_INST_RETIRED
+          - BR_MISP_RETIRED
+          
+  lpe-core:
+    name: "Low Power E-Core"
+    description: "Ultra-low power efficiency cores"
+    sub_domains:
+      execution:
+        name: "Core Execution"
+        events:
+          - INST_RETIRED
+          - UOPS_RETIRED
+          - CPU_CLK_UNHALTED
+          
+  # ============================================================================
+  # UNCORE DOMAINS - Shared Platform Resources
+  # ============================================================================
+  
+  imc:
+    name: "Integrated Memory Controller"
+    description: "DRAM controller and memory subsystem"
+    sub_domains:
+      dram_access:
+        name: "DRAM Access"
+        events:
+          - UNC_M_CAS_COUNT
+          - UNC_M_PRE_COUNT
+          - UNC_M_ACT_COUNT
+          - UNC_M_RD_CAS_RANK
+          - UNC_M_WR_CAS_RANK
+          
+      memory_bandwidth:
+        name: "Memory Bandwidth"
+        events:
+          - UNC_M_CAS_COUNT.RD
+          - UNC_M_CAS_COUNT.WR
+          - UNC_M_CAS_COUNT.ALL
+          
+      power:
+        name: "Memory Power"
+        events:
+          - UNC_M_POWER
+          - UNC_M_PMM
+          
+  cbo:
+    name: "Cache Box (CBO)"
+    description: "L3 cache coherency and snoop filter (client)"
+    sub_domains:
+      llc:
+        name: "Last Level Cache"
+        events:
+          - UNC_CBO_CACHE_LOOKUP
+          - UNC_CBO_XSNP_RESPONSE
+          - UNC_CBO_TOR_INSERTS
+          - UNC_CBO_TOR_OCCUPANCY
+          
+      snoop:
+        name: "Snoop Operations"
+        events:
+          - UNC_CBO_XSNP
+          - UNC_CBO_MONITOR_ARRAY
+          
+  hac_cbo:
+    name: "Hybrid Architecture CBO"
+    description: "Cache box for hybrid architecture"
+    sub_domains:
+      cache:
+        name: "Cache Operations"
+        events:
+          - UNC_HAC_CBO_CACHE
+          - UNC_HAC_CBO_TOR
+          
+  ncu:
+    name: "Node Controller Unit"
+    description: "Mesh/ring interconnect node controller"
+    sub_domains:
+      interconnect:
+        name: "Interconnect Traffic"
+        events:
+          - UNC_NCU
+          - UNC_NCU_CLOCKTICKS
+          
+  hac_ncu:
+    name: "Hybrid Architecture NCU"
+    description: "Node controller for hybrid architecture"
+    sub_domains:
+      ring:
+        name: "Ring Interface"
+        events:
+          - UNC_HAC_NCU_RING
+          - UNC_HAC_NCU_TOR
+          
+  ufibridge:
+    name: "UFI Bridge"
+    description: "Uncore Fabric Interface bridge"
+    sub_domains:
+      fabric:
+        name: "Fabric Transactions"
+        events:
+          - UNC_UFI
+          - UNC_UFIBRIDGE
+          
+  power:
+    name: "Power Management"
+    description: "Package-level power control and monitoring"
+    sub_domains:
+      c_states:
+        name: "C-State Residency"
+        events:
+          - CSTATE_CORE
+          - CSTATE_PKG
+          - C1_RESIDENCY
+          - C6_RESIDENCY
+          
+      frequency:
+        name: "Frequency Control"
+        events:
+          - PSTATE
+          - FREQ_TRANS
+          
+      energy:
+        name: "Energy Monitoring"
+        events:
+          - PKG_ENERGY
+          - CORE_ENERGY
+          - DRAM_ENERGY
+          - GPU_ENERGY
+
+# Domain Criticality Levels
+domain_criticality:
+  critical:
+    - p-core.frontend
+    - p-core.backend
+    - p-core.memory
+    - e-core.frontend
+    - e-core.backend
+    - imc.dram_access
+    - cbo.llc
+    
+  high:
+    - p-core.l1_cache
+    - p-core.l2_cache
+    - p-core.branch
+    - e-core.memory
+    - imc.memory_bandwidth
+    - cbo.snoop
+    - ncu.interconnect
+    
+  medium:
+    - p-core.fpu
+    - p-core.simd
+    - p-core.topdown
+    - lpe-core.execution
+    - hac_cbo.cache
+    - hac_ncu.ring
+    - power.c_states
+    
+  low:
+    - ufibridge.fabric
+    - power.frequency
+    - power.energy
+
+# Expected Coverage Thresholds by Domain
+expected_coverage:
+  p-core:
+    minimum_coverage: 85
+    sub_domains:
+      frontend: 90
+      backend: 90
+      memory: 85
+      l1_cache: 80
+      l2_cache: 75
+      branch: 85
+      fpu: 70
+      simd: 65
+      topdown: 80
+      
+  e-core:
+    minimum_coverage: 75
+    sub_domains:
+      frontend: 80
+      backend: 80
+      memory: 75
+      branch: 75
+      
+  imc:
+    minimum_coverage: 80
+    sub_domains:
+      dram_access: 85
+      memory_bandwidth: 90
+      power: 60
+      
+  cbo:
+    minimum_coverage: 75
+    sub_domains:
+      llc: 80
+      snoop: 70
+      
+  power:
+    minimum_coverage: 50
+    sub_domains:
+      c_states: 60
+      frequency: 50
+      energy: 40
+
+# Workload-Specific Domain Requirements
+workload_profiles:
+  memory_intensive:
+    required_domains:
+      - p-core.memory: 95
+      - imc.dram_access: 95
+      - imc.memory_bandwidth: 95
+      - cbo.llc: 90
+      - p-core.l1_cache: 90
+      - p-core.l2_cache: 85
+      
+  compute_intensive:
+    required_domains:
+      - p-core.backend: 95
+      - p-core.fpu: 90
+      - p-core.simd: 90
+      - e-core.backend: 85
+      - p-core.frontend: 85
+      
+  mixed_workload:
+    required_domains:
+      - p-core.frontend: 80
+      - p-core.backend: 80
+      - p-core.memory: 75
+      - e-core.backend: 70
+      - imc.dram_access: 75
+      
+  power_validation:
+    required_domains:
+      - power.c_states: 90
+      - power.frequency: 85
+      - power.energy: 85
+      - imc.power: 75

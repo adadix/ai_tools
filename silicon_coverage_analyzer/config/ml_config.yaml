@@ -1,0 +1,57 @@
+# ML Configuration for Silicon Coverage Analyzer
+# 100% LOCAL - No external API calls, all data stays on your machine
+
+ml_api:
+  enabled: true  # Enable local ML models (scikit-learn based)
+  
+  # All ML processing is LOCAL ONLY
+  # - Models trained on your local machine
+  # - No cloud/API dependencies
+  # - No data transmitted externally
+  # - Intel-compliant packages only
+  
+  # Model Settings
+  timeout_seconds: 60  # Max time for ML training per session
+  retry_attempts: 2  # Retry count for file I/O operations
+  fallback_to_statistical: true  # Use statistical methods if ML fails
+  
+  # Feature Flags (enable/disable specific ML capabilities)
+  # All features use LOCAL models only - no external dependencies
+  features:
+    anomaly_detection: true  # IsolationForest for unusual event behavior
+    coverage_prediction: true  # GradientBoosting for coverage trends
+    workload_recommendation: true  # Statistical analysis of workload effectiveness
+    correlation_analysis: true  # Event correlation patterns
+    temporal_analysis: true  # Track coverage trends over time
+  
+  # Model Configuration
+  models:
+    anomaly_detector:
+      confidence_threshold: 0.7  # Min confidence to flag anomaly
+      max_anomalies_per_domain: 10  # Limit results per domain
+      severity_threshold: "medium"  # Report medium and above
+    
+    coverage_predictor:
+      min_confidence: 0.8  # Min confidence for predictions
+      similar_runs_count: 5  # Number of similar runs to consider
+    
+    workload_recommender:
+      target_coverage: 90.0  # Default target coverage %
+      max_recommendations: 5  # Max workloads to recommend
+      consider_constraints: true  # Factor in time/tool constraints
+
+# Training Data Collection (local storage only)
+training_data:
+  enabled: true  # Collect data to improve local ML models
+  sample_rate: 1.0  # Collect 100% of runs for training
+  anonymize_hardware_ids: false  # Keep hardware info (local storage only)
+  include_raw_events: true  # Store complete event data for training
+
+# Baseline Tracking (enhanced with ML)
+baseline_tracking:
+  enabled: true
+  ml_enhanced_comparison: true  # Use ML for smarter baseline comparison
+  auto_detect_regression: true  # Auto-flag regressions
+  regression_confidence_threshold: 0.85  # Min confidence for regression alert
+  database_path: "data/coverage_history.db"  # SQLite database for historical data
+  retention_days: 90  # Keep last 90 days of data

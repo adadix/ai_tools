@@ -1,0 +1,208 @@
+# Stress Tool Detection Configuration
+# Defines process name patterns and their human-readable labels
+# Used for workload detection and ML training
+
+# Intel Internal Validation Tools (Highest Priority)
+intel_tools:
+  memicals:
+    label: "Memicals (Intel Memory Stress)"
+    category: "memory_stress"
+    priority: 1
+    
+  sandstone:
+    label: "Sandstone (Intel Instruction Validation)"
+    category: "cpu_stress"
+    priority: 1
+    
+  memrunner:
+    label: "MemRunner (Intel Memory Stress)"
+    category: "memory_stress"
+    priority: 1
+    
+  buslocker:
+    label: "BusLocker (Intel Interconnect Stress)"
+    category: "mixed_stress"
+    priority: 1
+    
+  dynamo:
+    label: "Dynamo (Intel Dynamic Stress)"
+    category: "mixed_stress"
+    priority: 1
+    
+  glaze:
+    label: "Glaze (Intel Stress Tool)"
+    category: "mixed_stress"
+    priority: 1
+    
+  supercollider:
+    label: "SuperCollider (Intel Multi-Component Stress)"
+    category: "mixed_stress"
+    priority: 1
+    aliases:
+      - "super_collider"
+    
+  mlc:
+    label: "MLC (Intel Memory Latency Checker)"
+    category: "memory_stress"
+    priority: 1
+    
+  ipmctl:
+    label: "ipmctl (Intel Optane DCPMM Stress)"
+    category: "memory_stress"
+    priority: 1
+    
+  svos:
+    label: "SVOS (Silicon Validation OS Tool)"
+    category: "mixed_stress"
+    priority: 1
+
+# Linux Stress Tools (High Priority)
+linux_tools:
+  stress-ng:
+    label: "stress-ng (Linux Multi-Stress)"
+    category: "mixed_stress"
+    priority: 2
+    
+  sysbench:
+    label: "sysbench (Linux Benchmark/Stress)"
+    category: "mixed_stress"
+    priority: 2
+    
+  stress:
+    label: "stress (Linux CPU/Memory Stress)"
+    category: "mixed_stress"
+    priority: 2
+    exact_match: true  # Exact match to avoid false positives
+    
+  fio:
+    label: "fio (Disk I/O Stress)"
+    category: "mixed_stress"
+    priority: 2
+    
+  memtester:
+    label: "memtester (Linux Memory Test)"
+    category: "memory_stress"
+    priority: 2
+    
+  cpuburn:
+    label: "cpuburn (Linux CPU Stress)"
+    category: "cpu_stress"
+    priority: 2
+
+# CPU Stress Tools (Cross-Platform)
+cpu_stress_tools:
+  prime95:
+    label: "Prime95/mprime (CPU Stress)"
+    category: "cpu_stress"
+    priority: 3
+    aliases:
+      - "mprime"
+    
+  linpack:
+    label: "Linpack (FP Math Stress)"
+    category: "cpu_stress"
+    priority: 3
+    aliases:
+      - "linx"
+    
+  intelburntest:
+    label: "Intel Burn Test (CPU)"
+    category: "cpu_stress"
+    priority: 3
+    aliases:
+      - "ibt"
+    
+  y-cruncher:
+    label: "y-cruncher (Math Stress)"
+    category: "cpu_stress"
+    priority: 3
+    aliases:
+      - "ycruncher"
+    
+  stressapptest:
+    label: "stressapptest (CPU/Memory Stress)"
+    category: "mixed_stress"
+    priority: 3
+
+# Memory Stress Tools
+memory_stress_tools:
+  memtest:
+    label: "MemTest (Memory Stress)"
+    category: "memory_stress"
+    priority: 3
+    
+  stream:
+    label: "Stream (Memory Bandwidth)"
+    category: "memory_stress"
+    priority: 3
+    
+  hci:
+    label: "HCI MemTest (Memory Stress)"
+    category: "memory_stress"
+    priority: 3
+    pattern: "hci.*mem"  # More complex pattern
+    
+  aida64:
+    label: "AIDA64 (System Stress)"
+    category: "mixed_stress"
+    priority: 4
+
+# GPU Stress Tools (Lower Priority for PMU Coverage)
+gpu_stress_tools:
+  furmark:
+    label: "FurMark (GPU Stress)"
+    category: "gpu_stress"
+    priority: 5
+    
+  heaven:
+    label: "Heaven Benchmark (GPU)"
+    category: "gpu_stress"
+    priority: 5
+    
+  3dmark:
+    label: "3DMark (GPU Benchmark)"
+    category: "gpu_stress"
+    priority: 5
+
+# Benchmark Tools (Lowest Priority - informational)
+benchmark_tools:
+  geekbench:
+    label: "Geekbench (Benchmark)"
+    category: "mixed_stress"
+    priority: 6
+    
+  cinebench:
+    label: "Cinebench (CPU Benchmark)"
+    category: "cpu_stress"
+    priority: 6
+    
+  phoronix:
+    label: "Phoronix Test Suite"
+    category: "mixed_stress"
+    priority: 6
+
+# Stress Level Mapping (for ML models)
+stress_level_mapping:
+  high_stress:
+    - "memicals"
+    - "prime95"
+    - "supercollider"
+    - "linpack"
+    - "stressapptest"
+    - "mlc"
+    - "stream"
+    - "memrunner"
+    
+  medium_stress:
+    - "sandstone"
+    - "svos"
+    - "ipmctl"
+    - "stress-ng"
+    - "sysbench"
+    - "buslocker"
+    - "dynamo"
+    
+  low_stress:
+    - "memtest"
+    - "fio"
+    - "aida64"

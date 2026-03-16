@@ -1,0 +1,630 @@
+templates:
+  client:
+    name: Intel Client Platforms
+    platforms:
+    - wildcatlake
+    - lunarlake
+    - arrowlake
+    - meteorlake
+    - raptorlake
+    instruction_categories:
+    - name: Integer ALU
+      description: Integer arithmetic, logic, and basic ALU operations
+      icon: 🔢
+      patterns:
+      - INT_
+      - ARITH.DIV
+      - ARITH.MUL
+      - UOPS_EXECUTED
+      - INST_RETIRED.ANY
+      color: '#0071c5'
+    - name: FP/SIMD
+      description: Floating point and vector/SIMD operations (AVX, SSE, FMA)
+      icon: 📊
+      patterns:
+      - FP_
+      - AVX
+      - SSE
+      - SIMD
+      - VEC
+      - FMA
+      - PACKED
+      - SCALAR
+      color: '#28a745'
+    - name: Memory Load/Store
+      description: Memory access operations (loads, stores, prefetch)
+      icon: 💾
+      patterns:
+      - MEM_LOAD
+      - MEM_STORE
+      - MEM_INST
+      - MEM_UOPS
+      - LOAD_
+      - STORE_
+      - PREFETCH
+      color: '#e74c3c'
+    - name: Branch
+      description: Branch/jump instructions and predictions
+      icon: 🔀
+      patterns:
+      - BR_
+      - BRANCH
+      - BACLEARS
+      - JUMP
+      - CALL
+      - RET
+      color: '#f39c12'
+    - name: Cache Operations
+      description: L1/L2/L3/LLC cache hits, misses, and operations
+      icon: 🗄️
+      patterns:
+      - L1D
+      - L1I
+      - L2_
+      - L3_
+      - LONGEST_LAT
+      - LLC
+      - CACHE
+      color: '#9b59b6'
+    - name: TLB Operations
+      description: Translation Lookaside Buffer operations
+      icon: 🗺️
+      patterns:
+      - DTLB
+      - ITLB
+      - STLB
+      - TLB
+      - PAGE_WALK
+      color: '#3498db'
+    - name: Atomic/Lock
+      description: Atomic operations and lock-based synchronization
+      icon: 🔒
+      patterns:
+      - LOCK
+      - ATOMIC
+      - MEM_LOCK
+      - XCHG
+      - CMPXCHG
+      color: '#e67e22'
+    - name: Pipeline/Control
+      description: Frontend, backend, decode, and pipeline control
+      icon: ⚙️
+      patterns:
+      - FRONTEND
+      - BACKEND
+      - DECODE
+      - IDQ
+      - ICACHE
+      - DSOURCE
+      - RESOURCE_STALLS
+      color: '#34495e'
+    - name: Uncore/Power
+      description: Uncore, power, thermal, and system-level events
+      icon: 🔋
+      patterns:
+      - UNC_
+      - POWER
+      - ENERGY
+      - THERMAL
+      - PKG
+      - CORE_C
+      - PP0
+      - PP1
+      color: '#95a5a6'
+  server:
+    name: Intel Xeon Server Platforms
+    platforms:
+    - graniterapids
+    - emeraldrapids
+    - sapphirerapids
+    - icelake-sp
+    instruction_categories:
+    - name: Integer Compute
+      description: Integer and general compute operations
+      icon: 🔢
+      patterns:
+      - INT_
+      - ARITH
+      - UOPS_EXECUTED
+      - INST_RETIRED
+      color: '#0071c5'
+    - name: FP/Vector/Matrix
+      description: FP, SIMD, AVX-512, AMX matrix operations
+      icon: 📊
+      patterns:
+      - FP_
+      - AVX
+      - AVX512
+      - AMX
+      - SIMD
+      - VEC
+      - FMA
+      - TMUL
+      color: '#28a745'
+    - name: Memory Subsystem
+      description: Memory loads, stores, and access patterns
+      icon: 💾
+      patterns:
+      - MEM_
+      - LOAD
+      - STORE
+      - PREFETCH
+      color: '#e74c3c'
+    - name: Cache Hierarchy
+      description: L1/L2/L3/LLC cache operations
+      icon: 🗄️
+      patterns:
+      - L1D
+      - L1I
+      - L2_
+      - L3_
+      - LLC
+      - LONGEST_LAT
+      color: '#9b59b6'
+    - name: Uncore/Fabric
+      description: Uncore, mesh, CHA, and fabric operations
+      icon: 🕸️
+      patterns:
+      - UNC_
+      - CHA
+      - M2M
+      - M3UPI
+      - UPI
+      - MESH
+      color: '#3498db'
+    - name: I/O & PCIe
+      description: I/O operations and PCIe traffic
+      icon: 🔌
+      patterns:
+      - IIO
+      - PCI
+      - OFFCORE
+      - IO_
+      color: '#16a085'
+    - name: Branch/Control
+      description: Branch prediction and control flow
+      icon: 🔀
+      patterns:
+      - BR_
+      - BRANCH
+      - BACLEARS
+      - FRONTEND
+      - BACKEND
+      color: '#f39c12'
+  gpu:
+    name: Intel GPU/Accelerator Platforms
+    platforms:
+    - pontevecchio
+    - arcticSound
+    - flex
+    - max
+    instruction_categories:
+    - name: Compute Kernels
+      description: GPU compute kernel execution
+      icon: ⚡
+      patterns:
+      - KERNEL_
+      - THREAD_
+      - COMPUTE_
+      color: '#0071c5'
+    - name: Vector/SIMD
+      description: Vector and SIMD operations
+      icon: 📊
+      patterns:
+      - VEC
+      - SIMD
+      - FPU
+      color: '#28a745'
+    - name: Memory Transfer
+      description: Memory copy, DMA, and data movement
+      icon: 💾
+      patterns:
+      - MEM_
+      - COPY
+      - DMA
+      - TRANSFER
+      color: '#e74c3c'
+    - name: Cache/Shared Memory
+      description: Cache and shared local memory operations
+      icon: 🗄️
+      patterns:
+      - L1
+      - L2
+      - L3
+      - SLM
+      - SHARED
+      color: '#9b59b6'
+  generic:
+    name: Generic Intel Platform
+    platforms:
+    - generic
+    - unknown
+    instruction_categories:
+    - name: Execution
+      description: General instruction execution
+      icon: ⚙️
+      patterns:
+      - INST_
+      - UOPS_
+      - EXECUTED
+      - RETIRED
+      color: '#0071c5'
+    - name: Memory
+      description: Memory operations
+      icon: 💾
+      patterns:
+      - MEM_
+      - LOAD
+      - STORE
+      color: '#e74c3c'
+    - name: Cache
+      description: Cache operations
+      icon: 🗄️
+      patterns:
+      - L1
+      - L2
+      - L3
+      - LLC
+      - CACHE
+      color: '#9b59b6'
+    - name: Branch
+      description: Branch operations
+      icon: 🔀
+      patterns:
+      - BR_
+      - BRANCH
+      color: '#f39c12'
+    - name: Uncore
+      description: Uncore and system events
+      icon: 🖥️
+      patterns:
+      - UNC_
+      - POWER
+      - THERMAL
+      color: '#95a5a6'
+  arrowlake_s:
+    platforms:
+    - arrowlake_s
+    - ARROWLAKE_S
+    auto_generated: true
+    last_updated: '2025-12-14T18:22:56.623579'
+    instruction_categories:
+    - name: FP_SIMD
+      patterns:
+      - FP_
+      - AVX
+      - SSE
+      - SIMD
+      - VEC
+      - FMA
+      - FLOP
+      - DOUBLE
+      - SINGLE
+      icon: ''
+      color: '#28a745'
+      description: Floating-point and SIMD vector operations
+    - name: Memory
+      patterns:
+      - MEM_LOAD
+      - MEM_STORE
+      - MEM_INST
+      - MEM_UOPS
+      - LOAD_
+      - STORE_
+      icon: ''
+      color: '#e74c3c'
+      description: Memory load and store operations
+    - name: Branch
+      patterns:
+      - BR_
+      - BRANCH
+      - BACLEARS
+      - JUMP
+      - CALL
+      - RET
+      icon: ''
+      color: '#f39c12'
+      description: Branch and control flow operations
+    - name: Integer_ALU
+      patterns:
+      - INT_
+      - ARITH.DIV
+      - ARITH.MUL
+      - UOPS_EXECUTED
+      - ADD
+      - SUB
+      icon: ''
+      color: '#0071c5'
+      description: Integer arithmetic and logic operations
+    - name: Cache
+      patterns:
+      - L1D
+      - L1I
+      - L2_
+      - L3_
+      - LLC
+      - LONGEST_LAT
+      - CACHE
+      icon: ''
+      color: '#9b59b6'
+      description: Cache hierarchy operations
+    - name: TLB
+      patterns:
+      - DTLB
+      - ITLB
+      - STLB
+      - TLB
+      - PAGE
+      icon: ''
+      color: '#3498db'
+      description: Translation lookaside buffer operations
+    - name: Pipeline
+      patterns:
+      - FRONTEND
+      - BACKEND
+      - DECODE
+      - IDQ
+      - ICACHE
+      - FETCH
+      icon: '[GEAR]'
+      color: '#34495e'
+      description: Pipeline frontend and backend operations
+    - name: Atomic_Lock
+      patterns:
+      - LOCK
+      - ATOMIC
+      - MEM_LOCK
+      - XCHG
+      icon: ''
+      color: '#e67e22'
+      description: Atomic and lock operations
+    - name: Prefetch
+      patterns:
+      - PREFETCH
+      - HW_PRE
+      - SW_PRE
+      icon: '[*]'
+      color: '#16a085'
+      description: Hardware and software prefetch operations
+    - name: Power
+      patterns:
+      - POWER
+      - C_STATE
+      - FREQ
+      - THERMAL
+      - ENERGY
+      icon: ''
+      color: '#e91e63'
+      description: Power management and frequency scaling
+    - name: CPU_Operations
+      patterns:
+      - CPU_
+      - CPU
+      icon: ''
+      color: '#95a5a6'
+      description: CPU-related operations (auto-discovered)
+    - name: OFFCORE_Operations
+      patterns:
+      - OFFCORE_
+      - OFFCORE
+      icon: ''
+      color: '#95a5a6'
+      description: OFFCORE-related operations (auto-discovered)
+    - name: MEMORY_Operations
+      patterns:
+      - MEMORY_
+      - MEMORY
+      icon: ''
+      color: '#95a5a6'
+      description: MEMORY-related operations (auto-discovered)
+    - name: TOPDOWN_Operations
+      patterns:
+      - TOPDOWN_
+      - TOPDOWN
+      icon: ''
+      color: '#95a5a6'
+      description: TOPDOWN-related operations (auto-discovered)
+    - name: RS_Operations
+      patterns:
+      - RS_
+      - RS
+      icon: ''
+      color: '#95a5a6'
+      description: RS-related operations (auto-discovered)
+    - name: EXE_Operations
+      patterns:
+      - EXE_
+      - EXE
+      icon: ''
+      color: '#95a5a6'
+      description: EXE-related operations (auto-discovered)
+    - name: LSD_Operations
+      patterns:
+      - LSD_
+      - LSD
+      icon: ''
+      color: '#95a5a6'
+      description: LSD-related operations (auto-discovered)
+    - name: ARITH_Operations
+      patterns:
+      - ARITH_
+      - ARITH
+      icon: ''
+      color: '#95a5a6'
+      description: ARITH-related operations (auto-discovered)
+    - name: MACHINE_Operations
+      patterns:
+      - MACHINE_
+      - MACHINE
+      icon: ''
+      color: '#95a5a6'
+      description: MACHINE-related operations (auto-discovered)
+    - name: EPT_Operations
+      patterns:
+      - EPT_
+      - EPT
+      icon: ''
+      color: '#95a5a6'
+      description: EPT-related operations (auto-discovered)
+    - name: HW_Operations
+      patterns:
+      - HW_
+      - HW
+      icon: ''
+      color: '#95a5a6'
+      description: HW-related operations (auto-discovered)
+  wildcatlake:
+    platforms:
+    - wildcatlake
+    - WILDCATLAKE
+    auto_generated: true
+    last_updated: '2025-12-01T01:42:53.683276'
+    instruction_categories:
+    - name: FP_SIMD
+      patterns:
+      - FP_
+      - AVX
+      - SSE
+      - SIMD
+      - VEC
+      - FMA
+      - FLOP
+      - DOUBLE
+      - SINGLE
+      icon: 📊
+      color: '#28a745'
+      description: Floating-point and SIMD vector operations
+    - name: Memory
+      patterns:
+      - MEM_LOAD
+      - MEM_STORE
+      - MEM_INST
+      - MEM_UOPS
+      - LOAD_
+      - STORE_
+      icon: 💾
+      color: '#e74c3c'
+      description: Memory load and store operations
+    - name: Branch
+      patterns:
+      - BR_
+      - BRANCH
+      - BACLEARS
+      - JUMP
+      - CALL
+      - RET
+      icon: 🔀
+      color: '#f39c12'
+      description: Branch and control flow operations
+    - name: Integer_ALU
+      patterns:
+      - INT_
+      - ARITH.DIV
+      - ARITH.MUL
+      - UOPS_EXECUTED
+      - ADD
+      - SUB
+      icon: 🔢
+      color: '#0071c5'
+      description: Integer arithmetic and logic operations
+    - name: Cache
+      patterns:
+      - L1D
+      - L1I
+      - L2_
+      - L3_
+      - LLC
+      - LONGEST_LAT
+      - CACHE
+      icon: 🗄️
+      color: '#9b59b6'
+      description: Cache hierarchy operations
+    - name: TLB
+      patterns:
+      - DTLB
+      - ITLB
+      - STLB
+      - TLB
+      - PAGE
+      icon: 🗺️
+      color: '#3498db'
+      description: Translation lookaside buffer operations
+    - name: Pipeline
+      patterns:
+      - FRONTEND
+      - BACKEND
+      - DECODE
+      - IDQ
+      - ICACHE
+      - FETCH
+      icon: ⚙️
+      color: '#34495e'
+      description: Pipeline frontend and backend operations
+    - name: Atomic_Lock
+      patterns:
+      - LOCK
+      - ATOMIC
+      - MEM_LOCK
+      - XCHG
+      icon: 🔒
+      color: '#e67e22'
+      description: Atomic and lock operations
+    - name: Prefetch
+      patterns:
+      - PREFETCH
+      - HW_PRE
+      - SW_PRE
+      icon: ⚡
+      color: '#16a085'
+      description: Hardware and software prefetch operations
+    - name: Power
+      patterns:
+      - POWER
+      - C_STATE
+      - FREQ
+      - THERMAL
+      - ENERGY
+      icon: 🔋
+      color: '#e91e63'
+      description: Power management and frequency scaling
+    - name: CPU_Operations
+      patterns:
+      - CPU_
+      - CPU
+      icon: 🔧
+      color: '#95a5a6'
+      description: CPU-related operations (auto-discovered)
+    - name: ARITH_Operations
+      patterns:
+      - ARITH_
+      - ARITH
+      icon: 🔧
+      color: '#95a5a6'
+      description: ARITH-related operations (auto-discovered)
+    - name: EPT_Operations
+      patterns:
+      - EPT_
+      - EPT
+      icon: 🔧
+      color: '#95a5a6'
+      description: EPT-related operations (auto-discovered)
+    - name: HW_Operations
+      patterns:
+      - HW_
+      - HW
+      icon: 🔧
+      color: '#95a5a6'
+      description: HW-related operations (auto-discovered)
+fallback_category:
+  name: Other/Uncategorized
+  description: Events not matching predefined categories
+  icon: ❓
+  color: '#6c757d'
+detection:
+  method: auto
+  manual_template: client
+  auto_priority:
+  - cpu_model_name
+  - product_identifier
+  - platform_string
+  - fallback

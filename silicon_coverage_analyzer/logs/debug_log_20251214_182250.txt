@@ -1,0 +1,305 @@
+================================================================================
+Silicon Coverage Analyzer - Debug Log
+Started: 2025-12-14 18:22:50
+================================================================================
+
+[DEBUG] Logging enabled: logs\debug_log_20251214_182250.txt
+[DEBUG] All console output will be saved to: logs\debug_log_20251214_182250.txt
+
+[STARTING] Silicon Coverage Analysis...
+[CONFIG] Duration: 60s, Max events/domain: 10000
+================================================================================
+SILICON COVERAGE ANALYZER - Analysis Mode
+PMU Event Coverage Analysis (Stress-Framework Agnostic)
+================================================================================
+
+
+[STARTING] Silicon Coverage Analysis
+================================================================================
+[░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░]   0.0% | Initialization   
+
+[1/5] Connecting to SUT...
+[NETWORK] Found SUT IP from CommunicatorConfig: 10.138.140.217
+      [DEBUG] Windows detection failed
+      [DEBUG] Error: Warning: Permanently added '10.138.140.217' (ED25519) to the list of known hosts.
+bash: line 2: =: command not found
+bash: line 3: .Caption: command not found
+bash: line 3: Write-Output: command not f
+C:\Users\Lab_basvlab\Desktop\Script Making\silicon_coverage_analyzer\src\sut_communicator.py:336: ResourceWarning: unclosed file <_io.TextIOWrapper name='config/sut_config.yaml' mode='r' encoding='cp1252'>
+  config_data = yaml.safe_load(open('config/sut_config.yaml'))
+ResourceWarning: Enable tracemalloc to get the object allocation traceback
+
+      [i]  WORKLOAD DETECTED: Memicals (Intel Memory Stress)
+      Active processes: 1
+      [INFO] Analyzing coverage under active workload
+
+
+      [OK] Connected: 10.138.140.217
+       OS: Debian GNU/Linux 12 (bookworm) 12
+
+[1.5/5] Checking EMON installation...
+   Testing connection to 10.138.140.217...
+   [OK] SSH connection working
+   [DEBUG] Command success: True
+   [DEBUG] Stdout length: 826
+   [DEBUG] Stderr: Warning: Permanently added '10.138.140.217' (ED25519) to the list of known hosts.
+
+   [DEBUG] First 200 chars: PATH=/opt/intel/sep_private_5.56_linux_10010753b11497234/bin64:/opt/intel/sep_private_5.56_linux_10010753b11497234/android_target:/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin
+C_INCLUDE
+   [OK] EMON is installed and working
+[1.6/5] Validating EMON installation...
+      EMON Version: 56
+      Product: Arrowlake-S
+      Cores: 20 (8P + 12E)
+      PMU Units: imc(2), cbo(12), hac_cbo(2), ncu(2), hac_ncu(2), ufibridge(12)
+
+[2/5] Discovering PMU domains and events...
+   [DEBUG] DomainAnalyzer os_type: linux
+   [DEBUG] Command: sep_vars=$(find /opt/intel -name "sep_vars.sh" -type f 2>/dev/null | head -1); if [ -n "$sep_vars" ]; then source "$sep_vars"; fi; emon -pmu-types
+   [DEBUG] Success: True, Stdout len: 709, Stderr: Warning: Permanently added '10.138.140.217' (ED25519) to the list of known hosts.
+
+      [DEBUG] LD_LIBRARY_PATH=: Count=0, Output: PATH=/opt/intel/sep_private_5.56_linux_10010753b11497234/bin64:/opt/intel/sep_private_5.56_linux_10010753b11497234/android_target:/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin | C_INCLUDE_PATH=/opt/intel/sep_private_5.56_linux_10010753b11497234/config/emon_api: | CPLUS_INCLUDE_PATH=/opt/intel/sep_private_5.56_linux_10010753b11497234/config/emon_api:
+      [DEBUG] p-core: Count=0, Output: PATH=/opt/intel/sep_private_5.56_linux_10010753b11497234/bin64:/opt/intel/sep_private_5.56_linux_10010753b11497234/android_target:/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin | C_INCLUDE_PATH=/opt/intel/sep_private_5.56_linux_10010753b11497234/config/emon_api: | CPLUS_INCLUDE_PATH=/opt/intel/sep_private_5.56_linux_10010753b11497234/config/emon_api:
+      [DEBUG] e-core: Count=0, Output: PATH=/opt/intel/sep_private_5.56_linux_10010753b11497234/bin64:/opt/intel/sep_private_5.56_linux_10010753b11497234/android_target:/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin | C_INCLUDE_PATH=/opt/intel/sep_private_5.56_linux_10010753b11497234/config/emon_api: | CPLUS_INCLUDE_PATH=/opt/intel/sep_private_5.56_linux_10010753b11497234/config/emon_api:
+      [DEBUG] imc: Count=0, Output: PATH=/opt/intel/sep_private_5.56_linux_10010753b11497234/bin64:/opt/intel/sep_private_5.56_linux_10010753b11497234/android_target:/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin | C_INCLUDE_PATH=/opt/intel/sep_private_5.56_linux_10010753b11497234/config/emon_api: | CPLUS_INCLUDE_PATH=/opt/intel/sep_private_5.56_linux_10010753b11497234/config/emon_api:
+      [DEBUG] cbo: Count=0, Output: PATH=/opt/intel/sep_private_5.56_linux_10010753b11497234/bin64:/opt/intel/sep_private_5.56_linux_10010753b11497234/android_target:/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin | C_INCLUDE_PATH=/opt/intel/sep_private_5.56_linux_10010753b11497234/config/emon_api: | CPLUS_INCLUDE_PATH=/opt/intel/sep_private_5.56_linux_10010753b11497234/config/emon_api:
+      [DEBUG] hac_cbo: Count=0, Output: PATH=/opt/intel/sep_private_5.56_linux_10010753b11497234/bin64:/opt/intel/sep_private_5.56_linux_10010753b11497234/android_target:/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin | C_INCLUDE_PATH=/opt/intel/sep_private_5.56_linux_10010753b11497234/config/emon_api: | CPLUS_INCLUDE_PATH=/opt/intel/sep_private_5.56_linux_10010753b11497234/config/emon_api:
+      [DEBUG] ncu: Count=0, Output: PATH=/opt/intel/sep_private_5.56_linux_10010753b11497234/bin64:/opt/intel/sep_private_5.56_linux_10010753b11497234/android_target:/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin | C_INCLUDE_PATH=/opt/intel/sep_private_5.56_linux_10010753b11497234/config/emon_api: | CPLUS_INCLUDE_PATH=/opt/intel/sep_private_5.56_linux_10010753b11497234/config/emon_api:
+      [DEBUG] hac_ncu: Count=0, Output: PATH=/opt/intel/sep_private_5.56_linux_10010753b11497234/bin64:/opt/intel/sep_private_5.56_linux_10010753b11497234/android_target:/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin | C_INCLUDE_PATH=/opt/intel/sep_private_5.56_linux_10010753b11497234/config/emon_api: | CPLUS_INCLUDE_PATH=/opt/intel/sep_private_5.56_linux_10010753b11497234/config/emon_api:
+      [DEBUG] ufibridge: Count=0, Output: PATH=/opt/intel/sep_private_5.56_linux_10010753b11497234/bin64:/opt/intel/sep_private_5.56_linux_10010753b11497234/android_target:/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin | C_INCLUDE_PATH=/opt/intel/sep_private_5.56_linux_10010753b11497234/config/emon_api: | CPLUS_INCLUDE_PATH=/opt/intel/sep_private_5.56_linux_10010753b11497234/config/emon_api:
+      [DEBUG] power: Count=0, Output: PATH=/opt/intel/sep_private_5.56_linux_10010753b11497234/bin64:/opt/intel/sep_private_5.56_linux_10010753b11497234/android_target:/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin | C_INCLUDE_PATH=/opt/intel/sep_private_5.56_linux_10010753b11497234/config/emon_api: | CPLUS_INCLUDE_PATH=/opt/intel/sep_private_5.56_linux_10010753b11497234/config/emon_api:
+   [1/10] Analyzing LD_LIBRARY_PATH=...
+      [OK] 0 events found
+   [2/10] Analyzing p-core...
+      [OK] 675 events found
+   [3/10] Analyzing e-core...
+      [OK] 453 events found
+   [4/10] Analyzing imc...
+      [OK] 66 events found
+   [5/10] Analyzing cbo...
+      [OK] 203 events found
+   [6/10] Analyzing hac_cbo...
+      [OK] 193 events found
+   [7/10] Analyzing ncu...
+      [OK] 72 events found
+   [8/10] Analyzing hac_ncu...
+      [OK] 104 events found
+   [9/10] Analyzing ufibridge...
+      [OK] 54 events found
+   [10/10] Analyzing power...
+      [OK] 23 events found
+      Domains: 10 available
+      Events: 1843 total discovered
+        - LD_LIBRARY_PATH=: 0 events
+        - p-core: 675 events
+        - e-core: 453 events
+        - imc: 66 events
+        - cbo: 203 events
+        ... and 5 more
+
+
+[3/5] Collecting coverage data...
+
+      [ESTIMATE] Standard optimized collection:
+          Total events: 1843
+          Domains: 10
+          Sample duration: 60 seconds
+          Batch size: 1-1 events/batch (auto-tuned at runtime)
+
+          BEST CASE (1 events/batch):
+            Batches: ~1840
+            Time: ~1909 minutes (31.8 hours)
+
+          TYPICAL CASE (1 events/batch):
+            Batches: ~1840
+            Time: ~1909 minutes (31.8 hours)
+
+          WORST CASE (1 event/batch):
+            Batches: ~1840
+            Time: ~1909 minutes (31.8 hours)
+
+          Estimated completion: 2025-12-16 02:11:41 (typical)
+                         Range: 02:11 - 02:11
+
+
+[DEBUG] Creating health monitor...
+
+[HEALTH] Monitoring system health: 
+[DEBUG] Health command output (402 chars):
+===DISK_SPACE===
+16115284 10740940 4550136 71%
+===EMON_PROCESS===
+489 /usr/bin/dbus-daemon --system --address=systemd: --nofork --nopidfile --systemd-activation --syslog-only
+===CPU_USAGE===
+100.0===MEMORY===
+3936 512 2471
+===LOAD_AVG===
+ 1.13, 1.03, 1.01
+===NETWORK===
+1419963766 3133820258
+===TEMP===
+93
+===DISK_IO===
+0.00 0.00
+===CONTEXT_SWITCHES===
+202760259
+===PROCESSES===
+239
+===INTERRUPTS===
+0
+
+
+[DEBUG] Found 23 sections in output
+[DEBUG] DISK_SPACE: '16115284 10740940 4550136 71%'
+[DEBUG] EMON_PROCESS: '489 /usr/bin/dbus-daemon --system --address=systemd: --nofork --nopidfile --syst'
+[DEBUG] CPU_USAGE: '100.0'
+[DEBUG] MEMORY: '3936 512 2471'
+[DEBUG] LOAD_AVG: '1.13, 1.03, 1.01'
+[DEBUG] NETWORK: '1419963766 3133820258'
+[DEBUG] TEMP: '93'
+[DEBUG] DISK_IO: '0.00 0.00'
+[DEBUG] CONTEXT_SWITCHES: '202760259'
+[DEBUG] PROCESSES: '239'
+[DEBUG] INTERRUPTS: '0'
+[OK]
+================================================================================
+[HEALTH] Snapshot captured - CPU: 100.0%, Memory: 13.01%, Disk Free: 4.34 GB
+[HEALTH] EMON Running: False, PID: N/A
+[HEALTH] 
+[HEALTH] NOTE: CPU utilization measures OS workload, NOT EMON PMU coverage
+[HEALTH]       * EMON coverage = % of hardware events monitored
+[HEALTH]       * CPU utilization = % of CPU time executing vs idle
+[HEALTH]       Both can be valid: idle CPU (0%) + high EMON coverage (80-90%)
+================================================================================
+
+
+      [DEBUG] skip_emon_init = True
+      [INIT] Skipping EMON initialization (already done)
+      [INIT] [OK] Using existing EMON driver
+[CHECKPOINT] Initialized: C:\silicon_coverage_analyzer_data\checkpoints\checkpoint_20251214_182305.json
+      [CHECKPOINT] Saved: checkpoint_20251214_182305.json
+
+      [CHECKPOINT] Session started: 20251214_182305
+      [CHECKPOINT] 10 domains to collect
+      [CHECKPOINT] Checkpoint file: C:\silicon_coverage_analyzer_data\checkpoints\checkpoint_20251214_182305.json
+      [MODE] Deferred transfer - collect all files first, transfer at end
+              This prevents connection timeouts during long collections
+
+      [PROGRESS] Starting collection: 10 domains
+      
+
+      [DOMAIN 2/10] P-CORE
+      [STRESS TRACKING] Monitoring workload changes...
+[STRESS TRACKER] Starting detection on 10.138.140.217...
+[STRESS TRACKER] Detection result: detected=True, processes=1
+[STRESS TRACKER] Initial stress: Memicals (Intel Memory Stress)
+[STRESS TRACKER] Initial stress: Memicals (Intel Memory Stress)
+      [STRESS TRACKING] Initial: Memicals (Intel Memory Stress)
+      [SEQUENTIAL MODE] Collecting 1 event at a time
+      [COLLECT] 675 events in 675 batches (1 events/batch)
+      [PHASE 1/3] Collecting data on SUT...
+          [BATCH 1/675] Collecting 1 events (60s)...
+          [DEBUG] Using timeout: 180s (base=180, current=180)
+[DEBUG] Health/stress sampling error: name 'batch_num' is not defined
+[DEBUG] Health/stress sampling error: name 'batch_num' is not defined
+[DEBUG] Health/stress sampling error: name 'batch_num' is not defined
+[DEBUG] Health/stress sampling error: name 'batch_num' is not defined
+          [BATCH 1/675] [OK] Completed in 3.4s
+          [BATCH 2/675] Collecting 1 events (60s)...
+          [DEBUG] Using timeout: 180s (base=180, current=180)
+[DEBUG] Health/stress sampling error: name 'batch_num' is not defined
+[DEBUG] Health/stress sampling error: name 'batch_num' is not defined
+[DEBUG] Health/stress sampling error: name 'batch_num' is not defined
+[DEBUG] Health/stress sampling error: name 'batch_num' is not defined
+          [BATCH 2/675] [OK] Completed in 3.4s
+          [BATCH 3/675] Collecting 1 events (60s)...
+          [DEBUG] Using timeout: 180s (base=180, current=180)
+[DEBUG] Health/stress sampling error: name 'batch_num' is not defined
+[DEBUG] Health/stress sampling error: name 'batch_num' is not defined
+[DEBUG] Health/stress sampling error: name 'batch_num' is not defined
+[DEBUG] Health/stress sampling error: name 'batch_num' is not defined
+          [BATCH 3/675] [OK] Completed in 3.4s
+          [BATCH 4/675] Collecting 1 events (60s)...
+          [DEBUG] Using timeout: 180s (base=180, current=180)
+[DEBUG] Health/stress sampling error: name 'batch_num' is not defined
+[DEBUG] Health/stress sampling error: name 'batch_num' is not defined
+[DEBUG] Health/stress sampling error: name 'batch_num' is not defined
+[DEBUG] Health/stress sampling error: name 'batch_num' is not defined
+          [BATCH 4/675] [OK] Completed in 3.4s
+          [BATCH 5/675] Collecting 1 events (60s)...
+          [DEBUG] Using timeout: 180s (base=180, current=180)
+[DEBUG] Health/stress sampling error: name 'batch_num' is not defined
+[DEBUG] Health/stress sampling error: name 'batch_num' is not defined
+[DEBUG] Health/stress sampling error: name 'batch_num' is not defined
+[DEBUG] Health/stress sampling error: name 'batch_num' is not defined
+          [BATCH 5/675] [OK] Completed in 3.4s
+          [BATCH 6/675] Collecting 1 events (60s)...
+          [DEBUG] Using timeout: 180s (base=180, current=180)
+[DEBUG] Health/stress sampling error: name 'batch_num' is not defined
+[DEBUG] Health/stress sampling error: name 'batch_num' is not defined
+[DEBUG] Health/stress sampling error: name 'batch_num' is not defined
+[DEBUG] Health/stress sampling error: name 'batch_num' is not defined
+          [BATCH 6/675] [OK] Completed in 3.4s
+          [BATCH 7/675] Collecting 1 events (60s)...
+          [DEBUG] Using timeout: 180s (base=180, current=180)
+[DEBUG] Health/stress sampling error: name 'batch_num' is not defined
+[DEBUG] Health/stress sampling error: name 'batch_num' is not defined
+[DEBUG] Health/stress sampling error: name 'batch_num' is not defined
+[DEBUG] Health/stress sampling error: name 'batch_num' is not defined
+          [BATCH 7/675] [OK] Completed in 3.4s
+          [BATCH 8/675] Collecting 1 events (60s)...
+          [DEBUG] Using timeout: 180s (base=180, current=180)
+[DEBUG] Health/stress sampling error: name 'batch_num' is not defined
+[DEBUG] Health/stress sampling error: name 'batch_num' is not defined
+[DEBUG] Health/stress sampling error: name 'batch_num' is not defined
+[DEBUG] Health/stress sampling error: name 'batch_num' is not defined
+          [BATCH 8/675] [OK] Completed in 3.4s
+          [BATCH 9/675] Collecting 1 events (60s)...
+          [DEBUG] Using timeout: 180s (base=180, current=180)
+[DEBUG] Health/stress sampling error: name 'batch_num' is not defined
+[DEBUG] Health/stress sampling error: name 'batch_num' is not defined
+[DEBUG] Health/stress sampling error: name 'batch_num' is not defined
+[DEBUG] Health/stress sampling error: name 'batch_num' is not defined
+          [BATCH 9/675] [OK] Completed in 3.4s
+          [BATCH 10/675] Collecting 1 events (60s)...
+          [DEBUG] Using timeout: 180s (base=180, current=180)
+[DEBUG] Health/stress sampling error: name 'batch_num' is not defined
+[DEBUG] Health/stress sampling error: name 'batch_num' is not defined
+[DEBUG] Health/stress sampling error: name 'batch_num' is not defined
+[DEBUG] Health/stress sampling error: name 'batch_num' is not defined
+          [BATCH 10/675] [OK] Completed in 3.4s
+          [BATCH 11/675] Collecting 1 events (60s)...
+          [DEBUG] Using timeout: 180s (base=180, current=180)
+[DEBUG] Health/stress sampling error: name 'batch_num' is not defined
+[DEBUG] Health/stress sampling error: name 'batch_num' is not defined
+[DEBUG] Health/stress sampling error: name 'batch_num' is not defined
+[DEBUG] Health/stress sampling error: name 'batch_num' is not defined
+          [BATCH 11/675] [OK] Completed in 3.4s
+          [BATCH 12/675] Collecting 1 events (60s)...
+          [DEBUG] Using timeout: 180s (base=180, current=180)
+[DEBUG] Health/stress sampling error: name 'batch_num' is not defined
+[DEBUG] Health/stress sampling error: name 'batch_num' is not defined
+[DEBUG] Health/stress sampling error: name 'batch_num' is not defined
+[DEBUG] Health/stress sampling error: name 'batch_num' is not defined
+[DEBUG] Health/stress sampling error: name 'batch_num' is not defined
+[DEBUG] Health/stress sampling error: name 'batch_num' is not defined
+[DEBUG] Health/stress sampling error: name 'batch_num' is not defined
+[DEBUG] Health/stress sampling error: name 'batch_num' is not defined
+[DEBUG] Health/stress sampling error: name 'batch_num' is not defined
+[DEBUG] Health/stress sampling error: name 'batch_num' is not defined
+[DEBUG] Health/stress sampling error: name 'batch_num' is not defined
+[DEBUG] Health/stress sampling error: name 'batch_num' is not defined
+[DEBUG] Health/stress sampling error: name 'batch_num' is not defined
+[DEBUG] Health/stress sampling error: name 'batch_num' is not defined
+
+
+[INTERRUPTED] Analysis cancelled by user
+      [CHECKPOINT] Saved: checkpoint_20251214_182305.json
+
+      [CHECKPOINT] Session failed: User interrupted (Ctrl+C)
+      [CHECKPOINT] Data saved - can resume with: --resume 20251214_182305
+[CHECKPOINT] Data saved. Resume with: --resume 20251214_182305
+
+================================================================================
+Ended: 2025-12-14 18:23:56
+================================================================================

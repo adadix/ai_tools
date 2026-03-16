@@ -1,0 +1,173 @@
+product: wildcatlake
+generated_date: '2025-12-01T01:42:53.636412'
+auto_generated: true
+description: Auto-learned instruction categories for wildcatlake
+instruction_categories:
+- name: FP_SIMD
+  patterns:
+  - FP_
+  - AVX
+  - SSE
+  - SIMD
+  - VEC
+  - FMA
+  - FLOP
+  - DOUBLE
+  - SINGLE
+  icon: 📊
+  color: '#28a745'
+  description: Floating-point and SIMD vector operations
+  event_count: 16
+  confidence: high
+- name: Memory
+  patterns:
+  - MEM_LOAD
+  - MEM_STORE
+  - MEM_INST
+  - MEM_UOPS
+  - LOAD_
+  - STORE_
+  icon: 💾
+  color: '#e74c3c'
+  description: Memory load and store operations
+  event_count: 5
+  confidence: high
+- name: Branch
+  patterns:
+  - BR_
+  - BRANCH
+  - BACLEARS
+  - JUMP
+  - CALL
+  - RET
+  icon: 🔀
+  color: '#f39c12'
+  description: Branch and control flow operations
+  event_count: 34
+  confidence: high
+- name: Integer_ALU
+  patterns:
+  - INT_
+  - ARITH.DIV
+  - ARITH.MUL
+  - UOPS_EXECUTED
+  - ADD
+  - SUB
+  icon: 🔢
+  color: '#0071c5'
+  description: Integer arithmetic and logic operations
+  event_count: 2
+  confidence: high
+- name: Cache
+  patterns:
+  - L1D
+  - L1I
+  - L2_
+  - L3_
+  - LLC
+  - LONGEST_LAT
+  - CACHE
+  icon: 🗄️
+  color: '#9b59b6'
+  description: Cache hierarchy operations
+  event_count: 14
+  confidence: high
+- name: TLB
+  patterns:
+  - DTLB
+  - ITLB
+  - STLB
+  - TLB
+  - PAGE
+  icon: 🗺️
+  color: '#3498db'
+  description: Translation lookaside buffer operations
+  event_count: 2
+  confidence: high
+- name: Pipeline
+  patterns:
+  - FRONTEND
+  - BACKEND
+  - DECODE
+  - IDQ
+  - ICACHE
+  - FETCH
+  icon: ⚙️
+  color: '#34495e'
+  description: Pipeline frontend and backend operations
+  event_count: 0
+  confidence: high
+- name: Atomic_Lock
+  patterns:
+  - LOCK
+  - ATOMIC
+  - MEM_LOCK
+  - XCHG
+  icon: 🔒
+  color: '#e67e22'
+  description: Atomic and lock operations
+  event_count: 1
+  confidence: high
+- name: Prefetch
+  patterns:
+  - PREFETCH
+  - HW_PRE
+  - SW_PRE
+  icon: ⚡
+  color: '#16a085'
+  description: Hardware and software prefetch operations
+  event_count: 0
+  confidence: high
+- name: Power
+  patterns:
+  - POWER
+  - C_STATE
+  - FREQ
+  - THERMAL
+  - ENERGY
+  icon: 🔋
+  color: '#e91e63'
+  description: Power management and frequency scaling
+  event_count: 0
+  confidence: high
+- name: CPU_Operations
+  patterns:
+  - CPU_
+  - CPU
+  icon: 🔧
+  color: '#95a5a6'
+  description: CPU-related operations (auto-discovered)
+  event_count: 4
+  confidence: medium
+- name: ARITH_Operations
+  patterns:
+  - ARITH_
+  - ARITH
+  icon: 🔧
+  color: '#95a5a6'
+  description: ARITH-related operations (auto-discovered)
+  event_count: 3
+  confidence: medium
+- name: EPT_Operations
+  patterns:
+  - EPT_
+  - EPT
+  icon: 🔧
+  color: '#95a5a6'
+  description: EPT-related operations (auto-discovered)
+  event_count: 5
+  confidence: medium
+- name: HW_Operations
+  patterns:
+  - HW_
+  - HW
+  icon: 🔧
+  color: '#95a5a6'
+  description: HW-related operations (auto-discovered)
+  event_count: 3
+  confidence: medium
+fallback_category:
+  name: Other
+  icon: ❓
+  color: '#6c757d'
+  description: Uncategorized events

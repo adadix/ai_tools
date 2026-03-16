@@ -1,0 +1,54 @@
+# Azure Storage Configuration for Silicon Coverage Analyzer
+# Enables centralized data storage for multi-SUT scenarios
+
+azure_storage:
+  # Enable/disable Azure upload
+  enabled: false  # Set to true when ready to use Azure
+  
+  # Authentication method
+  # - 'connection_string': Simple, recommended for internal use
+  # - 'msal': Intel SSO (requires additional setup)
+  auth_method: connection_string
+  
+  # Azure Storage Account (obtain from Azure Portal)
+  storage_account: "your_storage_account_name"
+  
+  # Connection string (obtain from Azure Portal > Storage Account > Access Keys)
+  # Format: "DefaultEndpointsProtocol=https;AccountName=...;AccountKey=...;EndpointSuffix=core.windows.net"
+  connection_string: "${AZURE_STORAGE_CONNECTION_STRING}"  # Use environment variable
+  
+  # Storage containers and tables
+  blob_container: "silicon-coverage-data"  # Blob container for reports/data
+  table_name: "coveragemetrics"  # Table for structured metrics
+  
+  # Upload configuration
+  upload_after_run: true  # Automatically upload after each analysis
+  upload_components:
+    html_report: true      # Upload HTML reports
+    json_data: true        # Upload JSON analysis data
+    csv_files: true        # Upload CSV files
+    structured_metrics: true  # Push metrics to Table Storage
+  
+  # ML data integration
+  ml_integration:
+    upload_raw_data: false     # Upload raw_data/ folder (large files)
+    upload_models: false       # Upload trained models (for sharing across SUTs)
+    upload_training_logs: true # Upload training logs
+  
+  # Retention (for cleanup scripts)
+  retention_days: 90  # Keep data for 90 days
+
+# Multi-SUT scenarios
+multi_sut:
+  # When multiple SUTs push to same Azure storage
+  aggregate_analytics: true   # Enable cross-SUT analytics
+  compare_baselines: true     # Compare SUTs against baseline
+  share_ml_models: false      # Use shared ML models across SUTs
+
+# Notification (optional)
+notifications:
+  enabled: false
+  teams_webhook: ""  # Microsoft Teams webhook for alerts
+  alert_on_upload_failure: true
+  alert_on_low_coverage: true
+  coverage_threshold: 70.0  # Alert if coverage drops below this

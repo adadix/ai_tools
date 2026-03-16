@@ -1,0 +1,163 @@
+# Counter to Functional Block Mapping Configuration
+# INTEL CONFIDENTIAL - INTERNAL USE ONLY
+
+# This file maps performance counter patterns to silicon functional blocks
+# Customize this file based on your specific platform architecture
+
+counter_mapping:
+  # Core Execution
+  INST_RETIRED: Core_Execution
+  CPU_CLK_UNHALTED: Core_Clocking
+  UOPS_RETIRED: Core_Execution
+  UOPS_ISSUED: Core_Frontend
+  UOPS_EXECUTED: Core_Execution
+  CYCLES: Core_Clocking
+  
+  # Memory Hierarchy
+  MEM_LOAD_RETIRED: Memory_LoadStore
+  MEM_STORE_RETIRED: Memory_LoadStore
+  L1D_PEND_MISS: Cache_L1D
+  L1D: Cache_L1D
+  L1I: Cache_L1I
+  L2_RQSTS: Cache_L2
+  L2_LINES: Cache_L2
+  LONGEST_LAT_CACHE: Cache_L3
+  LLC: Cache_LLC
+  
+  # TLB
+  DTLB_LOAD: TLB_Data
+  DTLB_STORE: TLB_Data
+  ITLB_MISSES: TLB_Instruction
+  STLB: TLB_Shared
+  
+  # Branch Prediction
+  BR_INST_RETIRED: BranchPredictor
+  BR_MISP_RETIRED: BranchPredictor
+  BRANCH: BranchPredictor
+  
+  # Floating Point / SIMD
+  FP_ARITH_INST_RETIRED: FPU_Execution
+  FP_COMP_OPS: FPU_Execution
+  SIMD: SIMD_Vector
+  AVX: SIMD_Vector
+  SSE: SIMD_Vector
+  
+  # Frontend
+  FRONTEND_RETIRED: Core_Frontend
+  DECODE: Core_Frontend
+  IDQ: Core_Frontend
+  ICACHE: Cache_L1I
+  
+  # Backend
+  BACKEND: Core_Backend
+  RESOURCE_STALLS: Core_Backend
+  RS_EVENTS: Core_Backend
+  ROB: Core_Backend
+  
+  # Uncore - Memory Controller
+  UNC_M_CAS_COUNT: MemoryController
+  UNC_M_PRE_COUNT: MemoryController
+  UNC_M_ACT_COUNT: MemoryController
+  UNC_M_RD: MemoryController
+  UNC_M_WR: MemoryController
+  IMC: MemoryController
+  
+  # Uncore - CHA/CBO
+  UNC_CHA: Uncore_CachingAgent
+  UNC_CBO: Uncore_CacheBox
+  
+  # Uncore - IIO
+  UNC_IIO: Uncore_IO
+  
+  # Uncore - PCU
+  UNC_PCU: Uncore_PowerControl
+  
+  # Uncore - UPI/QPI
+  UNC_UPI: Uncore_Interconnect
+  UNC_QPI: Uncore_Interconnect
+  
+  # Power Management
+  POWER: PowerManagement
+  C_STATE: PowerManagement
+  P_STATE: PowerManagement
+  PKG_ENERGY: PowerManagement
+  
+  # Offcore Requests
+  OFFCORE_REQUESTS: MemorySubsystem
+  OFFCORE_RESPONSE: MemorySubsystem
+  
+  # TopDown Metrics
+  TOPDOWN: TopDown_Analysis
+  PERF_METRICS: TopDown_Analysis
+
+# Functional Block Descriptions
+block_descriptions:
+  Core_Execution: "Core execution units - ALUs, multipliers, dividers"
+  Core_Frontend: "Instruction fetch, decode, and branch prediction"
+  Core_Backend: "Execution backend, scheduling, and retirement"
+  Core_Clocking: "Clock distribution and dynamic frequency management"
+  Memory_LoadStore: "Load/store execution units and buffers"
+  Cache_L1D: "Level 1 Data Cache (32KB-64KB per core)"
+  Cache_L1I: "Level 1 Instruction Cache (32KB-64KB per core)"
+  Cache_L2: "Level 2 Unified Cache (256KB-2MB per core)"
+  Cache_L3: "Level 3 Shared Cache / Last Level Cache"
+  Cache_LLC: "Last Level Cache (shared across cores)"
+  TLB_Data: "Data Translation Lookaside Buffer"
+  TLB_Instruction: "Instruction Translation Lookaside Buffer"
+  TLB_Shared: "Second-level TLB (STLB) shared between L1 TLBs"
+  BranchPredictor: "Branch prediction unit and BTB"
+  FPU_Execution: "Floating point execution units"
+  SIMD_Vector: "SIMD/Vector execution units (SSE, AVX, AVX-512)"
+  MemoryController: "Integrated Memory Controller (IMC)"
+  Uncore_CachingAgent: "Caching and Home Agent (server platforms)"
+  Uncore_CacheBox: "Cache coherency box (client platforms)"
+  Uncore_IO: "I/O controller and PCIe interface"
+  Uncore_PowerControl: "Package-level power control unit"
+  Uncore_Interconnect: "Inter-socket interconnect (UPI/QPI)"
+  IO_PCIe: "PCIe root complex and endpoints"
+  PowerManagement: "Power management - C-states, P-states, energy metering"
+  MemorySubsystem: "Off-core memory subsystem requests"
+  TopDown_Analysis: "TopDown performance analysis hierarchy"
+  Unknown: "Unmapped or unknown functional block"
+
+# Expected minimum coverage for different stress scenarios
+expected_profiles:
+  # Memory stress scenario
+  memory_stress:
+    functional_blocks:
+      Memory_LoadStore:
+        minimum_coverage_percentage: 90
+      Cache_L1D:
+        minimum_coverage_percentage: 85
+      Cache_L2:
+        minimum_coverage_percentage: 80
+      Cache_L3:
+        minimum_coverage_percentage: 75
+      MemoryController:
+        minimum_coverage_percentage: 85
+      TLB_Data:
+        minimum_coverage_percentage: 70
+  
+  # Compute stress scenario  
+  compute_stress:
+    functional_blocks:
+      Core_Execution:
+        minimum_coverage_percentage: 95
+      FPU_Execution:
+        minimum_coverage_percentage: 85
+      SIMD_Vector:
+        minimum_coverage_percentage: 80
+      Core_Backend:
+        minimum_coverage_percentage: 85
+  
+  # Mixed workload
+  mixed_workload:
+    functional_blocks:
+      Core_Execution:
+        minimum_coverage_percentage: 80
+      Memory_LoadStore:
+        minimum_coverage_percentage: 70
+      Cache_L1D:
+        minimum_coverage_percentage: 70
+      BranchPredictor:
+        minimum_coverage_percentage: 60

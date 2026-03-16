@@ -1,0 +1,122 @@
+# SUT Configuration for Remote Collection
+# INTEL CONFIDENTIAL - INTERNAL USE ONLY
+# Supports both Windows and Linux SUTs
+
+# System Under Test Configuration
+sut:
+  # Static IP address (optional - will auto-discover if not set)
+  ip_address: null  # e.g., "192.168.1.100"
+  
+  # Authentication credentials
+  # NOTE: Credentials are selected automatically based on detected OS
+  # Windows SUTs: Uses administrator with no password
+  # Linux/SVOS SUTs: Uses root with "svos" password
+  
+  # Windows credentials (standard lab setup)
+  windows_username: "Administrator"
+  windows_password: ""  # No password for Windows lab SUTs
+  
+  # Linux/SVOS credentials (standard lab setup)
+  linux_username: "root"
+  linux_password: "svsos"
+  ssh_key_path: "C:\\Users\\Lab_basvlab\\.ssh\\id_rsa_sut"  # SSH private key for Linux
+  
+  # Legacy fields (deprecated - kept for compatibility)
+  username: "root"       # Will be overridden by OS-specific credentials
+  password: "svsos"      # Will be overridden by OS-specific credentials
+  
+  # Connection preferences
+  preferred_connection: "auto"  # auto, ssh, psremoting
+  connection_timeout: 30
+  
+  # EMON paths on SUT (auto-detected if not specified)
+  # Windows paths
+  windows:
+    emon_binary_path: "C:\\emon\\emon.exe"
+    sep_installation_path: "C:\\emon"
+    output_directory: "C:\\temp\\emon_output"
+    temp_directory: "C:\\temp\\silicon_coverage"
+  
+  # Linux paths
+  linux:
+    emon_binary_path: "/opt/intel/sep/bin64/emon"
+    sep_installation_path: "/opt/intel/sep"
+    output_directory: "/tmp/emon_output"
+    temp_directory: "/tmp/silicon_coverage"
+  
+  # Override auto-detected paths (optional)
+  emon_binary_path: null
+  sep_installation_path: null
+  output_directory: null
+
+# Default EMON collection settings
+collection:
+  # Default duration in seconds
+  default_duration: 300
+  
+  # Default event list (comprehensive silicon coverage)
+  default_events:
+    - "CPU_CLK_UNHALTED.THREAD"
+    - "INST_RETIRED.ANY"
+    - "UOPS_RETIRED.ALL"
+    - "UOPS_ISSUED.ANY"
+    - "MEM_LOAD_RETIRED.L1_HIT"
+    - "MEM_LOAD_RETIRED.L2_HIT"
+    - "MEM_LOAD_RETIRED.L3_HIT"
+    - "LONGEST_LAT_CACHE.MISS"
+    - "BR_INST_RETIRED.ALL_BRANCHES"
+    - "BR_MISP_RETIRED.ALL_BRANCHES"
+    - "L1D_PEND_MISS.PENDING"
+    - "L2_RQSTS.ALL_DEMAND_DATA_RD"
+    - "DTLB_LOAD_MISSES.MISS_CAUSES_A_WALK"
+    - "ITLB_MISSES.MISS_CAUSES_A_WALK"
+    - "FRONTEND_RETIRED.STLB_MISS"
+    - "BACKEND_RETIRED.RESOURCE_THRESHOLD"
+    - "UNC_M_CAS_COUNT.RD"
+    - "UNC_M_CAS_COUNT.WR"
+  
+  # Collection preferences
+  convert_to_csv: true
+  cleanup_remote_files: false
+  max_collection_time: 7200  # 2 hours max
+
+# Network discovery settings
+discovery:
+  # Network scanning preferences
+  scan_local_subnet: true
+  common_sut_ports: [22, 3389, 5985, 5986]
+  
+  # Common SUT IP patterns to try
+  common_sut_ips:
+    - "192.168.1.100"
+    - "192.168.1.101"
+    - "10.0.0.100"
+    - "172.16.1.100"
+  
+  # Discovery timeout
+  discovery_timeout: 60
+
+# Output and reporting settings
+output:
+  # Base output directory
+  base_output_dir: "output"
+  
+  # Report generation
+  generate_html_report: true
+  generate_json_export: true
+  include_visualizations: true
+  
+  # File retention
+  keep_raw_data: true
+  compress_old_results: false
+
+# Security settings
+security:
+  # Mark all outputs as confidential
+  mark_confidential: true
+  
+  # Secure file permissions
+  restrict_file_access: true
+  
+  # Logging security
+  log_security_warnings: true

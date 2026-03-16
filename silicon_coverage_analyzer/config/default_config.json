@@ -1,0 +1,13 @@
+{
+  "collection_duration": 3,
+  "min_activity_threshold": 100,
+  "max_events_per_domain": 10000,
+  "domains_to_analyze": "all",
+  "output_format": ["json", "html"],
+  "use_modular_report": true,
+  "coverage_thresholds": {
+    "good": 80,
+    "warning": 50,
+    "critical": 20
+  }
+}
