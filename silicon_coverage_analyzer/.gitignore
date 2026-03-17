@@ -37,10 +37,14 @@ env/
 
 # Output and data files (CONFIDENTIAL)
 output/
+logs/
 *.tb7
 *.dat
 *.log
 reports/
+
+# Config backups
+config/domain_config_backup_*.yaml
 
 # Sensitive data - NEVER COMMIT
 *emon*.csv
